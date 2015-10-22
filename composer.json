@@ -1,0 +1,45 @@
+{
+    "name": "tec/ayt/admin-bundle",
+    "description": "Admin bundle for TEC's Ama y trasciende",
+    "type": "symfony-bundle",
+    "keywords": [
+        "tec",
+        "ayt",
+        "adminbundle"
+    ],
+    "homepage": "https://github.com/jplarar/TecAytAdminBundle",
+    "license": "",
+    "authors": [
+        {
+            "name": "Juan Paulo Lara",
+            "email": "jplarar@gmail.mx",
+            "homepage": "https://github.com/jplarar",
+            "role": "creator,manager,architect,developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "symfony/config": "~2.1",
+        "symfony/dependency-injection": "~2.1",
+        "symfony/filesystem": "~2.1",
+        "symfony/form": "~2.1",
+        "symfony/framework-bundle": "~2.1",
+        "symfony/http-foundation": "~2.1",
+        "symfony/http-kernel": "~2.1",
+        "symfony/monolog-bundle": "~2.1",
+        "symfony/options-resolver": "~2.1",
+        "symfony/security": "~2.1",
+        "symfony/validator": "~2.1",
+        "sensio/framework-extra-bundle": "~2.1"
+    },
+    "suggest": {
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Tec\\Ayt\\AdminBundle": ""
+        }
+    },
+    "target-dir": "Tec/Ayt/AdminBundle"
+}

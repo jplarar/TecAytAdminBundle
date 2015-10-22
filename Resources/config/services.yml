@@ -1,0 +1,14 @@
+parameters:
+#    tec_ayt_admin.example.class: Tec\Ayt\AdminBundle\Example
+
+services:
+    tec_ayt.help_type_extension:
+        class: Tec\Ayt\AdminBundle\Form\Extension\FieldTypeHelpExtension
+        tags:
+            - { name: form.type_extension, alias: form }
+
+    tec_ayt.fieldset.type:
+        class: Tec\Ayt\AdminBundle\Form\Type\FieldsetType
+        arguments: []
+        tags:
+            - { name: form.type, alias: fieldset }

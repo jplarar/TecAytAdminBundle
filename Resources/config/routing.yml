@@ -1,0 +1,59 @@
+##  SECURITY
+tec_ayt_control_login:
+    pattern:    /login
+    defaults:   { _controller: TecAytAdminBundle:Security:login }
+    
+tec_ayt_control_login_check:
+    pattern:    /login/check
+    
+tec_ayt_control_logout:
+    pattern:    /logout
+
+## DASHBOARD
+tec_ayt_control_dashboard:
+    pattern:    /
+    defaults:   { _controller: TecAytAdminBundle:Dashboard:main }
+    
+## ADMIN
+
+tec_ayt_admin_admin_list:
+    pattern:    /admin
+    defaults:   { _controller: TecAytAdminBundle:Admin:list }
+
+tec_ayt_admin_admin_process:
+    pattern:    /admin/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Admin:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_admin_deactivate:
+    pattern:    /admin/deactivate/{id}
+    defaults:   { _controller: TecAytAdminBundle:Admin:deactivate }
+
+tec_ayt_admin_admin_password:
+    pattern:    /admin/password/{id}
+    defaults:   { _controller: TecAytAdminBundle:Admin:password }
+
+## USER
+
+tec_ayt_admin_user_list:
+    pattern:    /user
+    defaults:   { _controller: TecAytAdminBundle:User:list }
+
+tec_ayt_admin_user_process:
+    pattern:    /user/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:User:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_user_view:
+    pattern:    /user/view/{id}
+    defaults:   { _controller: TecAytAdminBundle:User:view }
+
+tec_ayt_admin_user_deactivate:
+    pattern:    /user/deactivate/{id}
+    defaults:   { _controller: TecAytAdminBundle:User:deactivate }
+
+tec_ayt_admin_user_password:
+    pattern:    /user/password/{id}
+    defaults:   { _controller: TecAytAdminBundle:User:password }

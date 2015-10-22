@@ -1,0 +1,146 @@
+{% extends 'TecAytAdminBundle:Common:layout.html.twig' %}
+{% set sideBar = 'users' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h2 class="box-title">Users</h2>
+                            <div class="box-tools pull-right">
+                                <a href="{{ path('tec_ayt_admin_user_process') }}" class="btn btn-info btn-xs">
+                                    <i class="fa fa-plus fa-fw"></i> New User
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="col-lg-12">
+                                    <div class="alert alert-info alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        {{ flashMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <table class="table table-striped" id="DataTable">
+                                <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for user in users %}
+                                    <tr>
+                                        <td><a href="{{ path('tec_ayt_admin_user_view',{'id': user.userId}) }}">{{ user.adminname }}</a></td>
+                                        <td>{{ user.fullName }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            {% if user.isActive %}
+                                                <i class="fa fa-check text-info"></i> <small>YES</small>
+                                            {% else %}
+                                                <i class="fa fa-ban text-danger"></i> <small>NO</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_user_process', {'id': user.userId}) }}">
+                                                <i class="fa fa-edit"></i> Edit</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_user_password', {'id': user.userId}) }}">
+                                                <i class="fa fa-edit"></i> Change password</a>
+                                        </td>
+                                        <td>
+                                            {% if user.isActive %}
+                                                <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_user_deactivate', {'id': user.userId}) }}">
+                                                    <i class="fa fa-edit"></i> Disable</a>
+                                            {% else %}
+                                                <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_user_deactivate', {'id': user.userId}) }}">
+                                                    <i class="fa fa-edit"></i> Enable</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div><!-- /.box-body -->
+                        {# <div class="box-footer">
+                            Footer
+                        </div><!-- /.box-footer--> #}
+                    </div><!-- /.box -->
+                </div>
+            </div>
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+{% endblock %}
+{% block footerAssets %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/tecaytadmin/plugins/datatables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/tecaytadmin/plugins/datatables/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            var oTable = $('#DataTable').DataTable( {
+                "lengthMenu": [[100, 500, -1], [100, 500, "All"]],
+                "columnDefs": [{
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": true
+                }],
+                initComplete: function () {
+
+                    // var api = this.api();
+
+                    // api.columns().indexes().flatten().each( function ( i ) {
+                    //     var column = api.column( i );
+                    //     if(i == 1) {
+                    //         var select = $('#companyNameList');
+                    //     } else if(i == 2) {
+                    //         var select = $('#clubNameList');
+                    //     } else if(i == 5) {
+                    //         var select = $('#typeList');
+                    //     }  else if(i == 9) {
+                    //         var select = $('#riskList');
+                    //     } else {
+                    //         var select = $('<select><option value="">Select an option</option></select>')
+                    //     }
+                    //     select.on( 'change', function () {
+                    //         var val = $.fn.dataTable.util.escapeRegex(
+                    //                 $(this).val()
+                    //         );
+                    //         column
+                    //                 .search( val ? '^'+val+'$' : '', true, false )
+                    //                 .draw();
+                    //     });
+                    //     column.data().unique().sort().each( function ( d, j ) {
+                    //         // console.log(j);
+                    //         select.append( '<option value="'+d+'">'+d+'</option>' )
+                    //     });
+                    // });
+
+                }
+            });
+            $("div.dataTables_filter input").unbind();
+            $("#search").keyup(function (e) {
+                var self = $(e.currentTarget);
+                console.log(oTable)
+                console.log(oTable.fnFilter)
+                if (e.keyCode == 13) {
+                    oTable.search(self.val());
+                    oTable.draw();
+                } else if(self.val() == '') {
+                    oTable.search('');
+                    oTable.draw();
+                }
+            });
+        });
+    </script>
+{% endblock %}

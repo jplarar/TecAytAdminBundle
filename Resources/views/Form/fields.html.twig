@@ -1,0 +1,229 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{# <form> tag #}
+
+{% block form -%}
+    {{ form_start(form) }}
+    <div class="box-body col-md-6">
+        {{- form_widget(form) -}}
+    </div>
+    {{ form_end(form) }}
+{%- endblock form %}
+
+{# form row #}
+
+{% block form_row %}
+    <div class="form-group {% if errors|length > 0 %}has-error{% endif %}">
+        {% if 'checkbox'  in block_prefixes %}
+            {{ form_widget(form) }}
+        {% else %}
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+        {% endif %}
+        <p class="help-block">
+            {{ form_errors(form) }}
+            {{ block('field_help') }}
+        </p>
+    </div>
+{% endblock %}
+
+{# form_widget_simple #}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        {% if suffix|default or prefix|default %}
+            <div class="input-group">
+                {% if prefix|default %}
+                    <span class="input-group-addon">{{ prefix }}</span>
+                {% endif %}
+                <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} />
+                {% if suffix|default %}
+                    <span class="input-group-addon">{{ suffix }}</span>
+                {% endif %}
+            </div>
+        {% else %}
+                <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} />
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{# date_widget #}
+
+{%- block date_widget -%}
+    {%- if widget == 'single_text' -%}
+        {% spaceless %}
+            {% set type = type|default('text') %}
+            <div class="input-group date">
+                <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+            </div>
+        {% endspaceless %}
+    {%- else -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- date_pattern|replace({
+                '{{ year }}':  form_widget(form.year),
+                '{{ month }}': form_widget(form.month),
+                '{{ day }}':   form_widget(form.day),
+            })|raw -}}
+        </div>
+    {%- endif -%}
+{%- endblock date_widget -%}
+
+{# percent_widget #}
+
+{% block percent_widget %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        {% set suffix = '%' %}
+        {{ block('form_widget_simple') }}
+    {% endspaceless %}
+{% endblock percent_widget %}
+
+{# checkbox_widget #}
+
+{%- block checkbox_widget -%}
+    {% set type = 'checkbox' %}
+    {% spaceless %}
+        <div class="checkbox">
+            <label for="{{ id }}">
+                <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+                {{ label }}</label>
+        </div>
+    {% endspaceless %}
+{%- endblock checkbox_widget -%}
+
+
+{# choice_widget_expanded #}
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="col-sm-4 tag">
+                {{- form_widget(child) -}}
+                {{- form_label(child) -}}
+            </div>
+        {% endfor -%}
+        <div class="clearfix"></div>
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{# labels #}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) %}
+    {% if not compound %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
+    {% endif %}
+    {% if required %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+    {% endif %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+{% endif %}
+        {% if 'checkbox' not in block_prefixes %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_label %}
+
+{# buttons #}
+
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+{%- endblock button_widget -%}
+
+{% block submit_widget -%}
+    {% set type = type|default('submit') %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-info pull-right')|trim}) %}
+    <div class="box-footer">
+        {{- block('button_widget') -}}
+    </div>
+{%- endblock submit_widget %}
+
+{# attributes #}
+
+{% block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if read_only %} readonly="readonly"{% endif -%}
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+
+    {# Checkbox fix... #}
+    {% if type is defined and type == 'checkbox'  %}
+        {# nothing .. #}
+    {% else %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+    {% endif %}
+
+
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrvalue is sameas(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not sameas(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock widget_attributes %}
+
+{% block button_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"{% if disabled %} disabled="disabled"{% endif -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrvalue is sameas(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not sameas(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock button_attributes %}
+
+{# Form errors #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                {{
+                error.messagePluralization is null
+                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                }}<br>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{# Form extension #}
+
+{# Help extension (@see form_row) #}
+{% block field_help %}
+    {% if help|default %}
+        {{ help }}
+    {% endif %}
+{% endblock %}
+
+{# fieldset extension #}
+{% block fieldset_widget %}
+    <fieldset {{ block('widget_container_attributes') }}>
+        {% if legend is defined and legend is not empty %}
+            <legend>{{ legend }}</legend>
+        {% endif %}
+        {{ form_widget(form) }}
+    </fieldset>
+{% endblock %}
