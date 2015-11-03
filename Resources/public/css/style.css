@@ -1,3 +1,10 @@
 .logo-lg {
 	margin-right: 35px;
 }
+
+.text-content {
+	max-width: 50px;
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

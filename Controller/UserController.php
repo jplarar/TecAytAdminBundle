@@ -38,6 +38,7 @@ class UserController extends Controller
             $options['mode'] = 'new';
         } else {
             $options['mode'] = 'edit';
+            $user->setBirthDate($user->getBirthDate()->format('Y-m-d'));
         }
 
         $formType = self::NAMESPACED_FORM_TYPE; // PHP quirk.
@@ -48,6 +49,10 @@ class UserController extends Controller
 
         // Check form validation
         if ($form->isValid()) {
+
+            // Clean date
+            $birthDate = new \DateTime($user->getBirthDate());
+            $user->setBirthDate($birthDate);
 
             $em = $this->getDoctrine()->getManager();
             ## Extend the default form validation

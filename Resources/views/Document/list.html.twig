@@ -1,5 +1,5 @@
 {% extends 'TecAytAdminBundle:Common:layout.html.twig' %}
-{% set sideBar = 'admins' %}
+{% set sideBar = 'documents' %}
 
 {% block content %}
     <div class="content-wrapper">
@@ -10,10 +10,10 @@
                 <div class="col-sm-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h2 class="box-title">Admins</h2>
+                            <h2 class="box-title">Documents</h2>
                             <div class="box-tools pull-right">
-                                <a href="{{ path('tec_ayt_admin_admin_process') }}" class="btn btn-info btn-xs">
-                                    <i class="fa fa-plus fa-fw"></i> New Admin
+                                <a href="{{ path('tec_ayt_admin_document_process') }}" class="btn btn-info btn-xs">
+                                    <i class="fa fa-plus fa-fw"></i> New Document
                                 </a>
                             </div>
                         </div>
@@ -29,39 +29,27 @@
                             <table class="table table-striped" id="DataTable">
                                 <thead>
                                 <tr>
-                                    <th>Username</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Active</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Role</th>
+                                    <th>File</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                {% for admin in admins %}
+                                {% for document in documents %}
                                     <tr>
-                                        <td>{#<a href="{{ path('tec_ayt_admin_admin_view',{'id': admin.adminId}) }}">{{ admin.adminname }}</a>#}{{ admin.username }}</td>
-                                        <td>{{ admin.fullName }}</td>
-                                        <td>{{ admin.email }}</td>
+                                        <td>{{ document.name }}</td>
+                                        <td>{{ document.description }}</td>
+                                        <td>{{ document.getRoleName }}</td>
+                                        <td><a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_document_download', {'id': document.documentId}) }}" download>
+                                                <i class="fa fa-download"></i> Download</a></td>
                                         <td>
-                                            {% if admin.isActive %}
-                                                <i class="fa fa-check text-info"></i> <small>YES</small>
-                                            {% else %}
-                                                <i class="fa fa-ban text-danger"></i> <small>NO</small>
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_admin_process', {'id': admin.adminId}) }}">
+                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_document_process', {'id': document.documentId}) }}">
                                                 <i class="fa fa-edit"></i> Edit</a>
-                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_admin_password', {'id': admin.adminId}) }}">
-                                                <i class="fa fa-edit"></i> Change password</a>
-                                            {% if admin.isActive %}
-                                                <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_admin_deactivate', {'id': admin.adminId}) }}">
-                                                    <i class="fa fa-edit"></i> Disable</a>
-                                            {% else %}
-                                                <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_admin_deactivate', {'id': admin.adminId}) }}">
-                                                    <i class="fa fa-edit"></i> Enable</a>
-                                            {% endif %}
+                                            <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_document_delete', {'id': document.documentId}) }}">
+                                                <i class="fa fa-edit"></i> Delete</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -91,6 +79,7 @@
                     "visible": true,
                     "searchable": true
                 }],
+                "order": [[ 1, "desc" ]],
                 initComplete: function () {
 
                     // var api = this.api();
@@ -122,19 +111,6 @@
                     //     });
                     // });
 
-                }
-            });
-            $("div.dataTables_filter input").unbind();
-            $("#search").keyup(function (e) {
-                var self = $(e.currentTarget);
-                console.log(oTable)
-                console.log(oTable.fnFilter)
-                if (e.keyCode == 13) {
-                    oTable.search(self.val());
-                    oTable.draw();
-                } else if(self.val() == '') {
-                    oTable.search('');
-                    oTable.draw();
                 }
             });
         });

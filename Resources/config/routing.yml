@@ -13,7 +13,8 @@ tec_ayt_control_logout:
 tec_ayt_control_dashboard:
     pattern:    /
     defaults:   { _controller: TecAytAdminBundle:Dashboard:main }
-    
+
+
 ## ADMIN
 
 tec_ayt_admin_admin_list:
@@ -33,6 +34,7 @@ tec_ayt_admin_admin_deactivate:
 tec_ayt_admin_admin_password:
     pattern:    /admin/password/{id}
     defaults:   { _controller: TecAytAdminBundle:Admin:password }
+
 
 ## USER
 
@@ -57,3 +59,126 @@ tec_ayt_admin_user_deactivate:
 tec_ayt_admin_user_password:
     pattern:    /user/password/{id}
     defaults:   { _controller: TecAytAdminBundle:User:password }
+
+
+## EVETN
+
+tec_ayt_admin_event_list:
+    pattern:    /event
+    defaults:   { _controller: TecAytAdminBundle:Event:list }
+
+tec_ayt_admin_event_process:
+    pattern:    /event/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Event:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_event_view:
+    pattern:    /event/view/{id}
+    defaults:   { _controller: TecAytAdminBundle:Event:view }
+
+tec_ayt_admin_event_delete:
+    pattern:    /event/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Event:delete }
+
+tec_ayt_admin_event_download:
+    pattern:    /event/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Event:download }
+
+
+## DOCUMENT
+
+tec_ayt_admin_document_list:
+    pattern:    /document
+    defaults:   { _controller: TecAytAdminBundle:Document:list }
+
+tec_ayt_admin_document_process:
+    pattern:    /document/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Document:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_document_view:
+    pattern:    /document/view/{id}
+    defaults:   { _controller: TecAytAdminBundle:Document:view }
+
+tec_ayt_admin_document_delete:
+    pattern:    /document/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Document:delete }
+
+tec_ayt_admin_document_download:
+    pattern:    /document/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Document:download }
+
+
+## ALBUM
+
+tec_ayt_admin_album_list:
+    pattern:    /album
+    defaults:   { _controller: TecAytAdminBundle:Album:list }
+
+tec_ayt_admin_album_process:
+    pattern:    /album/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Album:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_album_view:
+    pattern:    /album/view/{id}
+    defaults:   { _controller: TecAytAdminBundle:Album:view }
+
+tec_ayt_admin_album_delete:
+    pattern:    /album/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Album:delete }
+
+tec_ayt_admin_album_download:
+    pattern:    /album/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Album:download }
+
+## CONTENT
+
+tec_ayt_admin_content_list:
+    pattern:    /content/list/{id}
+    defaults:   { _controller: TecAytAdminBundle:Content:list }
+
+tec_ayt_admin_content_process:
+    pattern:    /content/process/{aid}/{id}
+    defaults:   { _controller: TecAytAdminBundle:Content:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_content_view:
+    pattern:    /content/view/{id}
+    defaults:   { _controller: TecAytAdminBundle:Content:view }
+
+tec_ayt_admin_content_delete:
+    pattern:    /content/delete/{aid}/{id}
+    defaults:   { _controller: TecAytAdminBundle:Content:delete }
+
+tec_ayt_admin_content_download:
+    pattern:    /content/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Content:download }
+
+## POST
+
+tec_ayt_admin_post_list:
+    pattern:    /post
+    defaults:   { _controller: TecAytAdminBundle:Post:list }
+
+tec_ayt_admin_post_process:
+    pattern:    /post/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Post:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_post_view:
+    pattern:    /post/view/{id}
+    defaults:   { _controller: TecAytAdminBundle:Post:view }
+
+tec_ayt_admin_post_delete:
+    pattern:    /post/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Post:delete }
+
+tec_ayt_admin_post_download:
+    pattern:    /post/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Post:download }

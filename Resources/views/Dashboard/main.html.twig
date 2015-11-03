@@ -7,7 +7,127 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-hdd-o"></i></span>
 
+                        <div class="info-box-content">
+                            <span class="info-box-text">Server Free Space</span>
+                            <span class="info-box-number">{{ (free)|number_format(2, '.', ',') }} {{ units }}</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {{ (total-free)/total*100 }}%"></div>
+                            </div>
+                  <span class="progress-description">
+                    {{ (total-free)|number_format(2, '.', ',') }} {{ units }} / {{ total|number_format(2, '.', ',') }} {{ units }}
+                  </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-red"><i class="fa fa-user-md"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Admin Users</span>
+                            <span class="info-box-number">{{ admins }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-blue"><i class="ion ion-ios-people-outline"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Friend Users</span>
+                            <span class="info-box-number">{{ friends }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Active Users</span>
+                            <span class="info-box-number">{{ active }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-calendar-o"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Next Events</span>
+                            <span class="info-box-number">{{ events }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-teal"><i class="fa fa-picture-o"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Pictures</span>
+                            <span class="info-box-number">{{ contents }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-green"><i class="fa fa-rss"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Blog Posts</span>
+                            <span class="info-box-number">{{ posts }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-orange"><i class="fa fa-comment"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Forum Topics</span>
+                            <span class="info-box-number">{{ topics }}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
             </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->

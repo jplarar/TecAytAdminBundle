@@ -48,7 +48,28 @@ class UserType extends AbstractType
                 ->add('role', 'choice', array(
                     'choices' => User::getAvailableRoles()
                 ))
-                ->add('email', 'email', array('required' => false))
+                ->add('email', 'email')
+                ->add('birthDate', 'text')
+                ->add('gender', 'choice', array(
+                    'choices'   => array('1' => 'Male',
+                        '0' => 'Female')
+                ))
+                ->add('state', 'text', array(
+                    'attr' => array(
+                        'placeholder' => 'Nuevo León',
+                    ),
+                ))
+                ->add('city', 'text', array(
+                    'attr' => array(
+                        'placeholder' => 'Monterrey',
+                    ),
+                ))
+                ->add('work', 'text', array(
+                    'label' => 'Professional Experience'
+                ))
+                ->add('education', 'choice', array(
+                    'choices'   => User::getAvailableEducations()
+                ))
                 ->add('isActive', 'choice', array(
                     'choices'   => array('1' => 'Active',
                         '0' => 'Inactive')
