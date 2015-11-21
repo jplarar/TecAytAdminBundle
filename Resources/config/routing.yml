@@ -182,3 +182,59 @@ tec_ayt_admin_post_delete:
 tec_ayt_admin_post_download:
     pattern:    /post/download/{id}
     defaults:   { _controller: TecAytAdminBundle:Post:download }
+
+## BANNER
+
+tec_ayt_admin_banner_list:
+    pattern:    /banner
+    defaults:   { _controller: TecAytAdminBundle:Banner:list }
+
+tec_ayt_admin_banner_process:
+    pattern:    /banner/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Banner:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_banner_delete:
+    pattern:    /banner/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Banner:delete }
+
+tec_ayt_admin_banner_download:
+    pattern:    /banner/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Banner:download }
+
+## SPONSOR
+
+tec_ayt_admin_sponsor_list:
+    pattern:    /sponsor
+    defaults:   { _controller: TecAytAdminBundle:Sponsor:list }
+
+tec_ayt_admin_sponsor_process:
+    pattern:    /sponsor/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Sponsor:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_sponsor_delete:
+    pattern:    /sponsor/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Sponsor:delete }
+
+tec_ayt_admin_sponsor_download:
+    pattern:    /sponsor/download/{id}
+    defaults:   { _controller: TecAytAdminBundle:Sponsor:download }
+
+## LINKS
+
+tec_ayt_admin_link_list:
+    pattern:    /link
+    defaults:   { _controller: TecAytAdminBundle:Link:list }
+
+tec_ayt_admin_link_process:
+    pattern:    /link/process/{id}
+    defaults:   { _controller: TecAytAdminBundle:Link:process, id: 0 }
+    requirements:
+        id:     \d+
+
+tec_ayt_admin_link_delete:
+    pattern:    /link/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Link:delete }

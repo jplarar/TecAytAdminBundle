@@ -10,9 +10,10 @@
             <!-- Optionally, you can add icons to the links -->
             <li {% if sideBar == 'events' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_event_list') }}"><i class="fa fa-calendar-o"></i> <span>Events</span></a></li>
             <li {% if sideBar == 'documents' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_document_list') }}"><i class="fa fa-file"></i> <span>Documents</span></a></li>
-            <li {% if sideBar == 'galeries' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_album_list') }}"><i class="fa fa-picture-o"></i> <span>Gallery</span></a></li>
-            <li {% if sideBar == 'links' %}class="active" {% endif %}><a href="#"><i class="fa fa-link"></i> <span>Links</span></a></li>
-            <li {% if sideBar == 'blogs' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_post_list') }}"><i class="fa fa-rss"></i> <span>Blog</span></a></li>
+            <li {% if sideBar == 'galeries' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_album_list') }}"><i class="fa fa-file-image-o"></i> <span>Gallery</span></a></li>
+            <li {% if sideBar == 'banners' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_banner_list') }}"><i class="fa fa-picture-o"></i> <span>Banners</span></a></li>
+            <li {% if sideBar == 'links' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_link_list') }}"><i class="fa fa-link"></i> <span>Links</span></a></li>
+            <li {% if sideBar == 'sponsors' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_sponsor_list') }}"><i class="fa fa-diamond"></i> <span>Sponsors</span></a></li>
             <li class="header">Settings</li>
             <li {% if sideBar == 'admins' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_admin_list') }}"><i class="fa fa-user-md"></i> <span>Admins</span></a></li>
             <li {% if sideBar == 'users' %}class="active" {% endif %}><a href="{{ path('tec_ayt_admin_user_list') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>

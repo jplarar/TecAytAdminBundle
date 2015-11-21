@@ -1,0 +1,83 @@
+{% extends 'TecAytAdminBundle:Common:layout.html.twig' %}
+{% set sideBar = 'links' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h2 class="box-title">Links</h2>
+                            <div class="box-tools pull-right">
+                                <a href="{{ path('tec_ayt_admin_link_process') }}" class="btn btn-info btn-xs">
+                                    <i class="fa fa-plus fa-fw"></i> New Link
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="col-lg-12">
+                                    <div class="alert alert-info alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        {{ flashMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <table class="table table-striped" id="DataTable">
+                                <thead>
+                                <tr>
+                                    <th>Url</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for link in links %}
+                                    <tr>
+                                        <td>{{ link.url }}</td>
+                                        <td>{{ link.description }}</td>
+                                        <td>
+                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_link_process', {'id': link.linkId}) }}">
+                                                <i class="fa fa-edit"></i> Edit</a>
+                                            <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_link_delete', {'id': link.linkId}) }}">
+                                                <i class="fa fa-edit"></i> Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+            </div>
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+{% endblock %}
+{% block footerAssets %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/tecaytadmin/plugins/datatables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/tecaytadmin/plugins/datatables/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            var oTable = $('#DataTable').DataTable( {
+                "lengthMenu": [[100, 500, -1], [100, 500, "All"]],
+                "columnDefs": [{
+                    "targets": [2],
+                    "visible": true,
+                    "searchable": true,
+                    "orderable": false
+                }],
+                "order": [[ 0, "desc" ]],
+                initComplete: function () {
+
+
+                }
+            });
+        });
+    </script>
+{% endblock %}
