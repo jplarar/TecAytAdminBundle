@@ -64,9 +64,9 @@ class DashboardController extends Controller
             ->getSingleScalarResult();
 
         /* @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('Tec\Ayt\CoreBundle\Entity\Post');
-        $posts = $repository->createQueryBuilder('p')
-            ->select('count(p.postId)')
+        $repository = $this->getDoctrine()->getRepository('Tec\Ayt\CoreBundle\Entity\Link');
+        $links = $repository->createQueryBuilder('l')
+            ->select('count(l.linkId)')
             ->getQuery()
             ->getSingleScalarResult();
 
@@ -88,7 +88,7 @@ class DashboardController extends Controller
             'active' => $active,
             'events' => $events,
             'contents' => $contents,
-            'posts' => $posts,
+            'links' => $links,
             'topics' => $topics
         ));
     }
