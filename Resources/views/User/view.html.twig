@@ -1,0 +1,73 @@
+{% extends 'TecAytAdminBundle:Common:layout.html.twig' %}
+{% set sideBar = 'users' %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+              <div class="box">
+                <div class="box-header with-border">
+                  <a href="{{ path('tec_ayt_admin_user_list') }}" class="btn btn-link btn-xs pull-left">
+                        <i class="fa fa-angle-left"></i> back
+                  </a>
+                  <h3 class="box-title"><b>{{ user.username }}</b></h3>
+                  <div class="box-tools pull-right">
+                    <span class="small">
+                        <i class="fa fa-database"></i> {{ user.userId }}
+                    </span>
+                    &nbsp;&nbsp;
+                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                    <h4>General information</h4>
+                    <dl class="dl-horizontal">
+                        <dt>Name</dt>
+                        <dd>{{ user.fullName }}</dd>
+                        <dt>Username</dt>
+                        <dd>{{ user.username }}</dd>
+                        <dt>Email</dt>
+                        <dd>{{ user.email }}</dd>
+                        <dt>Role</dt>
+                        <dd>{{ user.getRoleName() }}</dd>
+                        <dt>Active</dt>
+                        <dd>
+                            {% if user.isActive %}
+                                <i class="fa fa-check text-info"></i> <small>YES</small>
+                            {% else %}
+                                <i class="fa fa-ban text-danger"></i> <small>NO</small>
+                            {% endif %}
+                        </dd>
+                        {% if user.role == "ROLE_ACTIVE" %}
+                            <dt>Birth Date</dt>
+                            <dd>{{ user.birthDate|date('d/m/Y') }}</dd>
+                            <dt>Gender</dt>
+                            <dd>
+                                {% if user.gender %}
+                                    Male
+                                {% else %}
+                                    Female
+                                {% endif %}
+                            </dd>
+                            <dt>State</dt>
+                            <dd>{{ user.state }}</dd>
+                            <dt>City</dt>
+                            <dd>{{ user.city }}</dd>
+                            <dt>City</dt>
+                            <dd>{{ user.city }}</dd>
+                            <dt>Work</dt>
+                            <dd>{{ user.work }}</dd>
+                            <dt>Education</dt>
+                            <dd>{{ user.getEducationName() }}</dd>
+                        {% endif %}
+                    </dl>
+                    {# <img src="{{ club.bannerImageS3Key|s3 }}"/> #}
+                </div><!-- /.box-body -->
+                {# <div class="box-footer">
+                  Footer
+                </div><!-- /.box-footer--> #}
+              </div><!-- /.box -->
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+{% endblock %}

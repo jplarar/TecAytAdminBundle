@@ -1,5 +1,5 @@
 {% extends 'TecAytAdminBundle:Common:layout.html.twig' %}
-{% set sideBar = 'posts' %}
+{% set sideBar = 'topics' %}
 
 {% block content %}
     <div class="content-wrapper">
@@ -10,12 +10,7 @@
                 <div class="col-sm-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h2 class="box-title">Posts</h2>
-                            <div class="box-tools pull-right">
-                                <a href="{{ path('tec_ayt_admin_post_process') }}" class="btn btn-info btn-xs">
-                                    <i class="fa fa-plus fa-fw"></i> New Post
-                                </a>
-                            </div>
+                            <h2 class="box-title">Forum Topics</h2>
                         </div>
                         <div class="box-body">
                             {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -32,22 +27,18 @@
                                     <th>Title</th>
                                     <th>Content</th>
                                     <th>Author</th>
-                                    <th>File</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                {% for post in posts %}
+                                {% for topic in topics %}
                                     <tr>
-                                        <td>{{ post.title }}</td>
-                                        <td class="text-content">{{ post.content }}</td>
-                                        <td>{{ post.author }}</td>
-                                        <td><img src="{{ path('tec_ayt_admin_post_download', {'id': post.postId}) }}" alt="" height="70px"></td>
+                                        <td>{{ topic.title }}</td>
+                                        <td class="text-content">{{ topic.content }}</td>
+                                        <td>{{ topic.userId.username }}</td>
                                         <td>
-                                            <a class="btn bg-navy btn-xs" href="{{ path('tec_ayt_admin_post_process', {'id': post.postId}) }}">
-                                                <i class="fa fa-edit"></i> Edit</a>
-                                            <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_post_delete', {'id': post.postId}) }}">
+                                            <a class="btn btn-danger btn-xs" href="{{ path('tec_ayt_admin_topic_delete', {'id': topic.topicId}) }}">
                                                 <i class="fa fa-edit"></i> Delete</a>
                                         </td>
                                     </tr>

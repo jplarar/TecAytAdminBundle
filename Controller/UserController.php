@@ -73,7 +73,7 @@ class UserController extends Controller
 
             $this->addFlash(
                 'notice',
-                'Your changes were saved!'
+                'Tu mensaje ha sido enviado, pronto nos pondremos en contacto contigo'
             );
 
             return $this->redirect(

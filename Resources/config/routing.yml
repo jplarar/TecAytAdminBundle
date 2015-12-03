@@ -161,27 +161,13 @@ tec_ayt_admin_content_download:
 
 ## POST
 
-tec_ayt_admin_post_list:
-    pattern:    /post
-    defaults:   { _controller: TecAytAdminBundle:Post:list }
+tec_ayt_admin_topic_list:
+    pattern:    /topic
+    defaults:   { _controller: TecAytAdminBundle:Topic:list }
 
-tec_ayt_admin_post_process:
-    pattern:    /post/process/{id}
-    defaults:   { _controller: TecAytAdminBundle:Post:process, id: 0 }
-    requirements:
-        id:     \d+
-
-tec_ayt_admin_post_view:
-    pattern:    /post/view/{id}
-    defaults:   { _controller: TecAytAdminBundle:Post:view }
-
-tec_ayt_admin_post_delete:
-    pattern:    /post/delete/{id}
-    defaults:   { _controller: TecAytAdminBundle:Post:delete }
-
-tec_ayt_admin_post_download:
-    pattern:    /post/download/{id}
-    defaults:   { _controller: TecAytAdminBundle:Post:download }
+tec_ayt_admin_topic_delete:
+    pattern:    /topic/delete/{id}
+    defaults:   { _controller: TecAytAdminBundle:Topic:delete }
 
 ## BANNER
 
