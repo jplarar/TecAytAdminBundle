@@ -34,14 +34,13 @@
 {% block footerAssets %}
     {{ parent() }}
     <!-- Include Date picker -->
-    <script type="text/javascript" src="{{ asset('bundles/tecaytadmin/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tecaytadmin/plugins/datepicker/datepicker3.css') }}" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/tecaytadmin/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#event_date').datepicker({
-                format: "yyyy-mm-dd",
-                startView: 1
+            $("#event_date").datetimepicker({
+                format: "YYYY-MM-DD HH:mm:ss"
             });
         });
     </script>
