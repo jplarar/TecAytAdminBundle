@@ -108,7 +108,7 @@ class AdminController extends Controller
         // Check form validation
         if ($form->isValid()) {
 
-            $password = $form->get('password');
+            $password = $form->get('password')->getData();
             ## Extend the default form validation
             $factory = $this->get('security.encoder_factory');
 
